@@ -10,6 +10,7 @@ format:
     #footer: "[SARA's 3rd Foundation Day · 4 April 2026]()"
     fig-align: center
     css: sara-theme.css
+    pagetitle: "SARA 3rd Foundation Day Slides"
 filters:
   - roughnotation
 ---
