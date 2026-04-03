@@ -1,0 +1,882 @@
+/*-- scss:defaults --*/
+/*=============================================================
+  SARA Institute of Data Science
+  Quarto Reveal.js Theme — sara-theme.scss
+  Foundation Day Talk | 4 April 2026
+  
+  Compile with:  sass sara-theme.scss sara-theme.css
+  Or via Quarto: format: revealjs → theme: [default, sara-theme.scss]
+=============================================================*/
+
+// ── Google Fonts ─────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// ─────────────────────────────────────────────────────────────
+// 1. DESIGN TOKENS
+// ─────────────────────────────────────────────────────────────
+
+// Brand colours (from SARA Annual Report 2025-26)
+$sara-navy: #1E3A5F;
+$sara-navy-dark: #152C4A;
+$sara-navy-light: #2A4A7A;
+$sara-accent: #2563EB;
+$sara-accent-dark: #1D4ED8;
+$sara-accent-light: #93C5FD;
+$sara-gold: #D97706;
+$sara-gold-light: #FEF3C7;
+$sara-gold-pale: #FFFBEB;
+$sara-light: #EFF6FF;
+$sara-light-mid: #DBEAFE;
+$sara-white: #FFFFFF;
+$sara-dark: #1F2937;
+$sara-muted: #6B7280;
+$sara-muted-light: #9CA3AF;
+$sara-divider: #E5E7EB;
+$sara-success: #059669;
+$sara-warning: #F59E0B;
+
+// Semantic aliases
+$color-bg: $sara-white;
+$color-text: $sara-dark;
+$color-heading: $sara-navy;
+$color-link: $sara-accent;
+$color-rule: $sara-gold;
+$color-code-bg: #0F172A;
+$color-code-text: #E2E8F0;
+$color-inline-code: #F1F5F9;
+
+// Typography
+$font-heading: 'Playfair Display', Georgia, serif;
+$font-body: 'Inter', system-ui, -apple-system, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+// Font sizes (relative to reveal base)
+$fs-base: 28px;
+$fs-h1: 1.60em;
+$fs-h2: 1.25em;
+$fs-h3: 1.00em;
+$fs-h4: 0.85em;
+$fs-body: 0.82em;
+$fs-small: 0.65em;
+$fs-tiny: 0.52em;
+$fs-code: 0.68em;
+$fs-caption: 0.42em;
+
+// Spacing
+$space-xs: 0.25em;
+$space-sm: 0.5em;
+$space-md: 1.0em;
+$space-lg: 1.5em;
+$space-xl: 2.0em;
+
+// Borders & Radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-full: 999px;
+
+$border-rule: 3px solid $sara-gold;
+$border-card: 1.5px solid $sara-accent;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-base: 0.35s ease;
+
+// Slide dimensions
+$slide-width: 1280px;
+$slide-height: 720px;
+
+// ─────────────────────────────────────────────────────────────
+// 2. MIXINS
+// ─────────────────────────────────────────────────────────────
+
+// Gold rule beneath a heading
+@mixin gold-rule($width: 56px) {
+  &::after {
+    content: '';
+    display: block;
+    width: $width;
+    height: 3px;
+    background: $sara-gold;
+    margin-top: 0.35em;
+    border-radius: 2px;
+  }
+}
+
+// Card / box container
+@mixin card($bg: $sara-light, $border: $border-card, $radius: $radius-md) {
+  background: $bg;
+  border: $border;
+  border-radius: $radius;
+  padding: 1.2em 1.1em;
+}
+
+// Left-border callout
+@mixin callout($color: $sara-gold, $bg: $sara-gold-light) {
+  background: $bg;
+  border-left: 4px solid $color;
+  border-radius: 0 $radius-md $radius-md 0;
+  padding: 0.9em 1.2em;
+  margin: 0.8em 0;
+}
+
+// Text on dark slide
+@mixin dark-text {
+  color: $sara-white;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $sara-white;
+  }
+
+  p,
+  li {
+    color: $sara-light-mid;
+  }
+
+  a {
+    color: $sara-accent-light;
+  }
+}
+
+// Gradient navy background
+@mixin navy-gradient($angle: 160deg) {
+  background: linear-gradient($angle, $sara-navy 0%, $sara-navy-light 100%);
+}
+
+// ─────────────────────────────────────────────────────────────
+// 3. CSS CUSTOM PROPERTIES  (for runtime JS / Quarto access)
+// ─────────────────────────────────────────────────────────────
+
+:root {
+  --sara-navy: #{$sara-navy};
+  --sara-accent: #{$sara-accent};
+  --sara-gold: #{$sara-gold};
+  --sara-light: #{$sara-light};
+  --sara-white: #{$sara-white};
+  --sara-dark: #{$sara-dark};
+  --sara-muted: #{$sara-muted};
+  --sara-divider: #{$sara-divider};
+  --font-heading: #{$font-heading};
+  --font-body: #{$font-body};
+  --font-mono: #{$font-mono};
+}
+
+// ─────────────────────────────────────────────────────────────
+// 4. BASE REVEAL OVERRIDES
+// ─────────────────────────────────────────────────────────────
+
+.reveal-viewport {
+  background-color: $sara-white;
+}
+
+.reveal .slides {
+  font-family: $font-body;
+  font-size: $fs-base;
+  font-weight: 400;
+  color: $color-text;
+  line-height: 1.55;
+  text-align: left;
+}
+
+// Default slide padding
+.reveal .slides section {
+  background-color: $sara-white;
+  padding: 48px 64px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 5. SLIDE VARIANTS
+// ─────────────────────────────────────────────────────────────
+
+// Dark navy slide
+.reveal .slides section.dark {
+  @include navy-gradient;
+  @include dark-text;
+}
+
+// Light blue slide
+.reveal .slides section.light {
+  background-color: $sara-light;
+  color: $sara-dark;
+}
+
+// Gold accent slide
+.reveal .slides section.gold {
+  @include navy-gradient(135deg);
+  @include dark-text;
+}
+
+// Section divider slide
+.reveal .slides section.divider {
+  @include navy-gradient(135deg);
+  @include dark-text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: $sara-gold;
+  }
+
+  h2 {
+    font-size: 2em;
+    color: $sara-white;
+    border: none;
+
+    &::after {
+      margin: 0.4em auto 0;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 6. TITLE / COVER SLIDE
+// ─────────────────────────────────────────────────────────────
+
+.reveal .slides section.title-slide,
+.reveal .slides section:first-child {
+  @include navy-gradient(160deg);
+  color: $sara-white;
+  padding: 56px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // Gold left bar
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: $sara-gold;
+  }
+
+  .subtitle {
+    color: $sara-accent-light;
+    font-family: $font-body;
+    font-size: 0.65em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: $space-sm;
+  }
+
+  h1 {
+    font-family: $font-heading;
+    font-size: $fs-h1;
+    font-weight: 700;
+    line-height: 1.15;
+    color: $sara-white;
+    border: none;
+    margin: 0 0 0.4em 0;
+    padding: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .author {
+    color: $sara-light-mid;
+    font-size: 0.55em;
+    margin-top: $space-lg;
+  }
+
+  .date {
+    color: $sara-accent-light;
+    font-size: 0.45em;
+    margin-top: $space-xs;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 7. HEADINGS
+// ─────────────────────────────────────────────────────────────
+
+.reveal {
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: $font-heading;
+    color: $color-heading;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 0.5em 0;
+    text-align: left;
+  }
+
+  h1 {
+    font-size: $fs-h1;
+  }
+
+  h2 {
+    font-size: $fs-h2;
+    @include gold-rule;
+  }
+
+  h3 {
+    font-size: $fs-h3;
+    font-family: $font-body;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size: $fs-h4;
+    font-family: $font-body;
+    font-weight: 600;
+    color: $sara-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 8. BODY TEXT & LINKS
+// ─────────────────────────────────────────────────────────────
+
+.reveal p {
+  margin: 0 0 0.75em 0;
+  font-size: $fs-body;
+  line-height: 1.65;
+}
+
+.reveal a {
+  color: $color-link;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-bottom-color: $sara-accent;
+  }
+}
+
+.reveal .slides section.dark a,
+.reveal .slides section.gold a {
+  color: $sara-accent-light;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 9. LISTS
+// ─────────────────────────────────────────────────────────────
+
+.reveal ul,
+.reveal ol {
+  font-size: 0.80em;
+  line-height: 1.7;
+  margin: 0 0 0.75em 0;
+  padding: 0;
+}
+
+.reveal ul {
+  list-style: none;
+
+  li {
+    margin-bottom: 0.35em;
+    padding-left: 1.4em;
+    position: relative;
+
+    &::before {
+      content: '→';
+      color: $sara-accent;
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+  }
+}
+
+.reveal ol {
+  margin-left: 1.4em;
+
+  li {
+    margin-bottom: 0.35em;
+  }
+}
+
+.reveal .slides section.dark ul li::before,
+.reveal .slides section.gold ul li::before {
+  color: $sara-gold;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 10. CODE
+// ─────────────────────────────────────────────────────────────
+
+.reveal code {
+  font-family: $font-mono;
+  font-size: 0.78em;
+  background-color: $color-inline-code;
+  color: $sara-navy;
+  padding: 0.1em 0.35em;
+  border-radius: $radius-sm;
+}
+
+.reveal pre {
+  background-color: $color-code-bg;
+  border-left: 4px solid $sara-gold;
+  border-radius: $radius-md;
+  padding: 1.2em 1.4em;
+  font-size: $fs-code;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  margin: 0.8em 0;
+  overflow-x: auto;
+
+  code {
+    background: transparent;
+    color: $color-code-text;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 11. BLOCKQUOTE
+// ─────────────────────────────────────────────────────────────
+
+.reveal blockquote {
+  @include callout($sara-gold, $sara-light);
+  font-style: italic;
+  font-size: 0.80em;
+  color: $sara-dark;
+  box-shadow: none;
+  width: 100%;
+
+  p {
+    margin: 0 0 0.4em 0;
+  }
+
+  cite,
+  footer {
+    font-style: normal;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: $sara-muted;
+
+    &::before {
+      content: '— ';
+    }
+  }
+}
+
+.reveal .slides section.dark blockquote,
+.reveal .slides section.gold blockquote {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: $sara-gold;
+  color: $sara-light-mid;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 12. STAT BOXES
+// ─────────────────────────────────────────────────────────────
+
+.stat-box {
+  @include card($sara-light, $border-card, $radius-md);
+  text-align: center;
+
+  .number {
+    font-family: $font-body;
+    font-size: 2.2em;
+    font-weight: 800;
+    color: $sara-accent;
+    line-height: 1;
+    display: block;
+  }
+
+  .label {
+    font-size: 0.55em;
+    font-weight: 600;
+    color: $sara-navy;
+    margin-top: 0.3em;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+// On dark slides
+.reveal .slides section.dark .stat-box,
+.reveal .slides section.gold .stat-box {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.25);
+
+  .number {
+    color: $sara-gold;
+  }
+
+  .label {
+    color: $sara-light-mid;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 13. CALLOUT VARIANTS
+// ─────────────────────────────────────────────────────────────
+
+.callout {
+  border-radius: $radius-md;
+  padding: 1em 1.2em;
+  font-size: 0.75em;
+  margin: 0.8em 0;
+
+  &.gold {
+    @include callout($sara-gold, $sara-gold-light);
+  }
+
+  &.navy {
+    @include callout($sara-navy, $sara-light);
+  }
+
+  &.blue {
+    @include callout($sara-accent, $sara-light);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 14. GRID / COLUMN LAYOUTS
+// ─────────────────────────────────────────────────────────────
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-xl;
+  align-items: start;
+
+  &.three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &.four {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &.sixty-forty {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  &.forty-sixty {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  &.one-third {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  &.two-third {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 15. TABLES
+// ─────────────────────────────────────────────────────────────
+
+.reveal table {
+  font-size: 0.72em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.8em 0;
+
+  th {
+    background: $sara-navy;
+    color: $sara-white;
+    padding: 0.6em 1em;
+    font-weight: 600;
+    text-align: left;
+    font-family: $font-body;
+  }
+
+  td {
+    padding: 0.5em 1em;
+    border-bottom: 1px solid $sara-divider;
+    color: $sara-dark;
+  }
+
+  tr:nth-child(even) td {
+    background: $sara-light;
+  }
+
+  tr:hover td {
+    background: darken($sara-light, 2%);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 16. BADGES / TAGS
+// ─────────────────────────────────────────────────────────────
+
+.tag {
+  display: inline-block;
+  background: $sara-light;
+  color: $sara-accent;
+  border: 1px solid $sara-accent;
+  border-radius: $radius-full;
+  padding: 0.1em 0.65em;
+  font-size: 0.5em;
+  font-weight: 600;
+  margin: 0.15em;
+  letter-spacing: 0.04em;
+
+  &.gold {
+    background: $sara-gold-light;
+    color: #92400E;
+    border-color: $sara-gold;
+  }
+
+  &.navy {
+    background: $sara-light;
+    color: $sara-navy;
+    border-color: $sara-navy;
+  }
+
+  &.success {
+    background: #ECFDF5;
+    color: $sara-success;
+    border-color: $sara-success;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 17. IMAGES
+// ─────────────────────────────────────────────────────────────
+
+.reveal img {
+  border-radius: $radius-md;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  max-width: 100%;
+
+  &.circle {
+    border-radius: 50%;
+  }
+
+  &.no-shadow {
+    box-shadow: none;
+  }
+
+  &.no-radius {
+    border-radius: 0;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 18. PROGRESS, CONTROLS, SLIDE NUMBER
+// ─────────────────────────────────────────────────────────────
+
+.reveal .progress {
+  height: 4px;
+  background: $sara-divider;
+
+  span {
+    background: $sara-gold;
+    transition: width 0.4s ease;
+  }
+}
+
+.reveal .controls {
+  color: $sara-navy;
+
+  button:hover {
+    color: $sara-accent;
+  }
+}
+
+.reveal .slide-number {
+  font-family: $font-body;
+  font-size: 0.38em;
+  color: $sara-muted;
+  background: transparent;
+  bottom: 16px;
+  right: 24px;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 19. UTILITY CLASSES
+// ─────────────────────────────────────────────────────────────
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+// Text sizes
+.text-large {
+  font-size: 1.1em;
+}
+
+.text-small {
+  font-size: $fs-small;
+}
+
+.text-tiny {
+  font-size: $fs-tiny;
+}
+
+// Text colours
+.text-navy {
+  color: $sara-navy !important;
+}
+
+.text-accent {
+  color: $sara-accent !important;
+}
+
+.text-gold {
+  color: $sara-gold !important;
+}
+
+.text-muted {
+  color: $sara-muted !important;
+}
+
+.text-white {
+  color: $sara-white !important;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+// Spacing helpers
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-1 {
+  margin-top: $space-sm;
+}
+
+.mt-2 {
+  margin-top: $space-md;
+}
+
+.mt-3 {
+  margin-top: $space-lg;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: $space-sm;
+}
+
+.mb-2 {
+  margin-bottom: $space-md;
+}
+
+.mb-3 {
+  margin-bottom: $space-lg;
+}
+
+// Width helpers
+.w-full {
+  width: 100%;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.w-third {
+  width: 33%;
+}
+
+// Scrollable content
+.scrollable {
+  overflow-y: auto;
+  max-height: 560px;
+}
+
+// Divider line
+.sara-rule {
+  border: none;
+  border-top: 1.5px solid $sara-divider;
+  margin: $space-md 0;
+
+  &.gold {
+    border-top-color: $sara-gold;
+    border-top-width: 2px;
+  }
+}
+
+// Caption / footnote
+.caption {
+  font-size: $fs-caption;
+  color: $sara-muted;
+  font-style: italic;
+  margin-top: $space-sm;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 20. FRAGMENT ANIMATIONS
+// ─────────────────────────────────────────────────────────────
+
+.reveal .fragment {
+  &.fade-up {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform $transition-base, opacity $transition-base;
+
+    &.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  &.highlight-gold {
+    &.visible {
+      color: $sara-gold;
+      font-weight: 700;
+    }
+  }
+
+  &.highlight-blue {
+    &.visible {
+      color: $sara-accent;
+      font-weight: 700;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 21. PRINT / PDF
+// ─────────────────────────────────────────────────────────────
+
+@media print {
+  .reveal .slides section {
+    page-break-after: always;
+    height: $slide-height;
+    width: $slide-width;
+  }
+}
