@@ -113,7 +113,7 @@ Participants of the SARA Coding Bootcamps "Publish using Quarto"
 ## Guest Speakers {background-image="images/guest-speakers.png" background-size="contain" background-position="right" background-color="#001b3a" }
 
 ::: {.columns}
-::: {.column width=55%}
+::: {.column width=50%}
 
 <br>
 <br>
@@ -140,7 +140,7 @@ Established in 1969 | Mr. Rajesh Kataria, President
 
 ::::
 
-# Alison<br>Presmanes<br>Hill, PhD {background-image="images/alison-sara.jpeg" background-size="contain" background-position="110%" background-color="#001b3a" }
+# Alison<br>Presmanes<br>Hill, PhD {background-image="images/alison-sara.jpeg" background-size="contain" background-position="125%" background-color="#001b3a" }
 
 ## SARA Annual Report {background-color="#001b3a"}
 
