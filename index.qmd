@@ -15,7 +15,7 @@ filters:
   - roughnotation
 ---
 
-# SARA's 3rd<br>Foundation<br>Day Talk {background-image="images/3sara.gif" background-size="contain" background-position="90%"}
+# [SARA's 3rd<br>Foundation<br>Day Talk 2026]{style="color: #001b3a;"} {background-image="images/3sara.gif" background-size="contain" background-position="90%"}
 
 ##  {background-image="https://images.unsplash.com/photo-1615715035868-fc94bd5ffdac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" background-size="cover"}
 
@@ -53,9 +53,10 @@ Started in April 2023
 
 > [Democratise Data Science]{.clr-gold}
 
-[Providing world-class data science education with priority admission for marginalised communities and women students.]{.rn-fragment rn-color="#C8963E"}
 
-## Student's Overview {background-color="#001b3a"}
+[Free, world-class data science education, with priority admission for marginalised communities and women.]{.rn-fragment rn-color="#C8963E"}
+
+## 2025-26 Student's Overview {background-color="#001b3a"}
 
 ![](images/student-overview.png){fig-align="center"}
 
@@ -134,6 +135,8 @@ Participants of the SARA Coding Bootcamps "Publish using Quarto"
 ![](images/sonipat-bhawan.png)
 
 [***The Ambedkar <br>Educational Society Sonipat***]{.r-fit-text}
+
+Established in 1969 | Mr. Rajesh Kataria, President
 
 ::::
 
